@@ -1,2 +1,5 @@
 .deploy/.envs/prod.env
 .deploy/.envs/stage.env
+*.pyc
+.idea/
+__pycache__/

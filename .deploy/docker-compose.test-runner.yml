@@ -1,0 +1,13 @@
+version: '2'
+services:
+    tests:
+        environment:
+            - ENV_FILE=.deploy/.envs/test.env
+        build:
+            context: ..
+            dockerfile: .deploy/Dockerfile.test
+        expose:
+            - "5000"
+        volumes:
+            - ..:/app
+        network_mode: host

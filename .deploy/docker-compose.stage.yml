@@ -1,0 +1,13 @@
+version: '2'
+services:
+    service-api-stage:
+        restart: always
+        environment:
+            - ENV_FILE=.deploy/.envs/stage.env
+        build:
+            context: ..
+            dockerfile: .deploy/Dockerfile
+        ports:
+            - "5000:5000"
+        volumes:
+            - ..:/app

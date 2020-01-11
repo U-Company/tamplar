@@ -11,3 +11,5 @@ Type of docker files:
 * **docker-compose.test-runner.yml** -- this is file which run tests for your application and shoots to the application (docker-compose.local.full.yml)
 
 For each docker-compose we have environment file into `./.envs` directory.
+
+**Notice**: we configure compose with `network_mode: host` (in) therefore, our image links with localhost (no mapping ports, for example)

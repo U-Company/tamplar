@@ -32,7 +32,7 @@ This command push your image to pypi-package-registry
 
 From the root directory build the image
 
-    docker-compose -f .deploy/docker-compose.local.yml build
+    docker-compose -f .deploy/docker-compose.full.yml build
     
 After that, you must find the line with next text (last lines):
 

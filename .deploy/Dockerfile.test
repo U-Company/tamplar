@@ -1,5 +1,7 @@
 FROM ubuntu:18.04 AS BUILD
 
+ARG ENV_FILE
+
 RUN apt-get update && apt-get install make
 RUN apt-get install -y python3.7 python3-pip
 RUN python3.7 -m pip install --upgrade pip
@@ -9,4 +11,4 @@ COPY . /app
 WORKDIR /app
 
 RUN PIP=pip PYTHON=python3.7 make deps
-CMD PIP=pip PYTHON=python3.7 make test
+CMD PIP=pip PYTHON=python3.7 ENV_FILE=$ENV_FILE make test

@@ -1,6 +1,7 @@
 FROM ubuntu:18.04 AS BUILD
 
 ARG ENV_FILE
+ENV ENV_FILE ${ENV_FILE}
 
 RUN apt-get update && apt-get install make
 RUN apt-get install -y python3.7 python3-pip

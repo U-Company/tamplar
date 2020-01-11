@@ -8,7 +8,8 @@ Type of docker files:
 * **docker-compose.local.full.yml** -- full application with environment
 * **docker-compose.prod.yml** -- this is docker-compose for deploy to production
 * **docker-compose.stage.yml** -- this is docker-compose for deploy to stage. Stage and production have difference between ports
-* **docker-compose.test-runner.yml** -- this is file which run tests for your application and shoots to the application (docker-compose.local.full.yml)
+* **docker-compose.test.yml** -- all images for testing (some images from this file, you can build from docker-compose.local.env.yml)
+* **docker-compose.test-runner.yml** -- this is file which run tests for your application and shoots to the application (docker-compose.test.yml)
 
 For each docker-compose we have environment file into `./.envs` directory.
 

@@ -6,14 +6,10 @@ services:
             - "27017:27017"
     main-service:
         environment:
-            - ENV_FILE=.deploy/.envs/test.env
+            - ENV_FILE=.deploy/.envs/full.env
         build:
             context: ..
             dockerfile: .deploy/Dockerfile
-        ports:
-            - "5000:5000"
-        volumes:
-            - ..:/app
         depends_on:
-            - storage
+            - dependency-service
         network_mode: host

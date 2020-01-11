@@ -43,17 +43,17 @@ Now, you must set tag for image:
 
     docker tag <image-id> <private-docker-registry>/<project>-<version>-<service-name>:<the-same-version-setup.py>
     
-Please, add insecure-registry parameters to `/etc/docker/daemon.json`:
+Please, add insecure-registry parameters to `/etc/docker/daemon.json` (first time):
 
     {
         "insecure-registries" : [ "<private-docker-registry>" ]
     }
     
-And restart docker:
+And restart docker (first time):
 
     sudo service docker restart
 
-Now, login in docker registry with your login and password:
+Now, login in docker registry with your login and password (first time):
 
     docker login <private-docker-registry> -u="<username>" -p="<password>"
     

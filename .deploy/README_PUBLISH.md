@@ -41,7 +41,7 @@ After that, you must find the line with next text (last lines):
     
 Now, you must set tag for image:
 
-    docker tag <image-id> <private-docker-registry>/<grader>-<version>-<service-name>:<the-same-version-setup.py>
+    docker tag <image-id> <private-docker-registry>/<project>-<version>-<service-name>:<the-same-version-setup.py>
     
 Please, add insecure-registry parameters to `/etc/docker/daemon.json`:
 
@@ -59,7 +59,7 @@ Now, login in docker registry with your login and password:
     
 Push the image:
 
-    docker push <private-docker-registry>/<grader>-<version>-<service-name>:<the-same-version-setup.py>
+    docker push <private-docker-registry>/<project>-<version>-<service-name>:<the-same-version-setup.py>
     
 After that, you need remove image:
 

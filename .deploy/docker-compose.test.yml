@@ -1,0 +1,11 @@
+version: '2'
+services:
+    dependency-service:
+        image: "mongo:4.0.2"
+        ports:
+            - "27017:27017"
+    main-service:
+        image: "<registry-url>/<image-name>:<version>"
+        network_mode: host
+        depends_on:
+          - dependency-service

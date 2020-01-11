@@ -68,6 +68,10 @@ After that, you need remove image:
 You can see images:
 
     http://<private-docker-registry>/v2/_catalog
+    
+You can see all versions for image:
+
+    http://<private-docker-registry>/v2/<image-name>/tags/list
  
 Or concrete versions:
 

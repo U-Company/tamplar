@@ -35,3 +35,5 @@ deps:
 	$(info dependencies installing...)
 	$(info $(ENVS))
 	$(PIP) install -r requirements
+	$(PIP) install -r requirements.private --extra-index-url http://0.0.0.0:8081 --trusted-host 0.0.0.0
+

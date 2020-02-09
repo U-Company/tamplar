@@ -23,7 +23,13 @@ run:
 	$(info ${STORAGE_ENV_FILE})
 	$(ENVS) $(PYTHON) app.py
 
-test: clean
+local-run:
+	$(info storage starting...)
+	$(info $(ENVS))
+	$(info ${STORAGE_ENV_FILE})
+	$(ENVS) ENV_FILE=.deploy/.envs/local.env $(PYTHON) app.py
+
+test:
 	$(info waiting server...)
 	$(ENVS) $(PYTHON) ${SCRIPTS}waiting.py
 	$(info integration tests running...)

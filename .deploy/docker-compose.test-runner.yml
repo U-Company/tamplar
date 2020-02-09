@@ -3,7 +3,7 @@ services:
     tests:
         build:
             args:
-                - ENV_FILE=.deploy/.envs/test.env
+                - ENV_FILE=.deploy/.envs/local.env
             context: ..
             dockerfile: .deploy/Dockerfile.test
         expose:

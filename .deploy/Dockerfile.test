@@ -6,6 +6,8 @@ ENV ENV_FILE ${ENV_FILE}
 RUN apt-get update && apt-get install make
 RUN apt-get install -y python3.7 python3-pip
 RUN python3.7 -m pip install --upgrade pip
+RUN apt-get -y install build-essential python3.7-dev
+RUN apt-get -y install python3-uvloop
 RUN apt-get install -y git
 
 COPY . /app

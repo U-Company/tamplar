@@ -5,7 +5,7 @@ services:
         ports:
             - "27017:27017"
     main-service:
-        environment:
+        args:
             - ENV_FILE=.deploy/.envs/full.env
         build:
             context: ..

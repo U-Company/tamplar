@@ -28,6 +28,14 @@ github. Now, you need update package:
     
 This command push your image to pypi-package-registry
 
+# Installing package from private pypi repository
+
+    [global]
+    index-url = http://<login>:<password>@<your-host>:<your-port>
+    trusted-host = pypi.python.org
+                   pypi.org
+                   <your-host>:<your-port>
+
 # Publish image into docker registry (for local development and testing)
 
 From the root directory build the image

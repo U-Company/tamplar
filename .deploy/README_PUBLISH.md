@@ -40,6 +40,8 @@ You must lay the config file `pip.conf` into `~/.pip/`:
 
 # Publish image into docker registry (for local development and testing)
 
+Before build, you need add `pip.conf` into `.secrets`. You can see template [here](https://github.com/Hedgehogues/docker-compose-deploy/blob/master/.deploy/.secrets/pip.conf)
+
 From the root directory build the image
 
     docker-compose -f .deploy/docker-compose.full.yml build

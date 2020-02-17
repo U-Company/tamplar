@@ -30,6 +30,8 @@ This command push your image to pypi-package-registry
 
 # Installing package from private pypi repository
 
+You must lay the config file `pip.conf` into `~/.pip/`:
+
     [global]
     index-url = http://<login>:<password>@<your-host>:<your-port>
     trusted-host = pypi.python.org

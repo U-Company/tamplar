@@ -41,5 +41,4 @@ deps:
 	$(info dependencies installing...)
 	$(info $(ENVS))
 	$(PIP) install -r requirements
-	$(PIP) install -r requirements.private --extra-index-url http://<your-host>:<your-port>
 

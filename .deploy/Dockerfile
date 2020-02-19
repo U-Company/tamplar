@@ -14,4 +14,4 @@ COPY . /app
 WORKDIR /app
 
 RUN PIP=pip PYTHON=python3.7 make deps
-CMD PIP=pip PYTHON=python3.7 ENV_FILE=$ENV_FILE make local-run
+CMD PIP=pip PYTHON=python3.7 ENV_FILE=$ENV_FILE make local

@@ -1,6 +1,6 @@
 version: '2'
 services:
-    service-api-stage:
+    repo_name:
         restart: always
         build:            
             args: 

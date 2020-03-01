@@ -1,6 +1,6 @@
 version: '2'
 services:
-    service-api-prod:
+    repo_name:
         restart: always
         build:
             args: 

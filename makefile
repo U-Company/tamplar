@@ -5,6 +5,9 @@ TESTS=tests/
 ifndef PYTHON
 	PYTHON=python
 endif
+ifndef ENV_FILE
+	ENV_FILE=.deploy/.envs/test.env
+endif
 ifndef PYTEST
 	PYTEST=pytest
 endif

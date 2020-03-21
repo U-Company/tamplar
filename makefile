@@ -33,9 +33,6 @@ local-run:
 	$(ENVS) ENV_FILE=.deploy/.envs/local.env $(PYTHON) app.py
 
 test:
-	$(info waiting server...)
-	$(ENVS) $(PYTHON) ${SCRIPTS}waiting.py
-	$(info integration tests running...)
 	$(info $(ENVS))
 	$(info ${TESTS}${TEST_SUBFOLDER})
 	$(ENVS) $(PYTEST) -v -l --disable-warnings ${TESTS}${TEST_SUBFOLDER}

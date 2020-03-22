@@ -64,6 +64,10 @@ Please, add insecure-registry parameters to `/etc/docker/daemon.json` (first tim
 And restart docker (first time):
 
     sudo service docker restart
+    
+Now, you need install some pakcages:
+
+    sudo apt install gnupg2 pass 
 
 Now, login in docker registry with your login and password (first time):
 

@@ -21,7 +21,6 @@ ENVS=PYTHONPATH=${PYTHONPATH} VAULT_FILE=${VAULT_ENV}
 
 run:
 	$(info $(ENVS))
-	$(info ${STORAGE_ENV_FILE})
 	$(ENVS) $(PYTHON) app.py
 
 test:

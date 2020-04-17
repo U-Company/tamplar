@@ -28,6 +28,10 @@ github. Now, you need update package:
     
 This command push your image to pypi-package-registry
 
+# Delete package from private_pypi server
+
+    curl --form ":action=remove_pkg"  --form "name=<package-name>" --form "version=<package-version>" <pypi-registry-host> -H "Authorization: Basic <your-base64-token: "login:password">"
+
 # Installing package from private pypi repository
 
 You must lay the config file `pip.conf` into `~/.pip/`:

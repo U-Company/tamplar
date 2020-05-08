@@ -1,11 +1,9 @@
 import os
 import shutil
-import sys
 import subprocess
 
 import git
 from setuptools import sandbox as setuptools_
-from loguru import logger
 
 from tamplar.__internal import utils
 
@@ -14,11 +12,12 @@ repo_name = 'python-service-layout'
 account = 'git://github.com/Hedgehogues'
 
 
-logger.add(sys.stdout, backtrace=False, diagnose=True)
-
-
 def deps():
-    logger.info('install dependencies')
+    """
+    install dependencies from requirements
+    :return:
+    """
+    print('install dependencies')
     subprocess.call(['pip', 'install', '-r', 'requirements'])
 
 

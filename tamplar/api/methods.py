@@ -40,7 +40,7 @@ def init(agree=None, src_path=None, dst_path=None):
     init_pkg.init_tmpl(params=params, path=dst_path)
     shutil.copyfile(os.path.expanduser('~') + params.pip_conf_path, src_path+'./deployments/.secrets/pip.conf') # TODO: not tested
     shutil.rmtree(src_path+'.git')
-    init_pkg.init_readme(path=src_path)
+    init_pkg.init_readme(path=src_path, params=params)
 
 
 def run(mode='local', daemon=None):

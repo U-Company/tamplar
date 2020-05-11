@@ -1,2 +1,2 @@
 app_name = 'tamplar'
-app_version = '0.3.0'
+app_version = '0.3.2'

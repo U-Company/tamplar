@@ -29,7 +29,7 @@ def assert_validate_layout(folder, prj_name, additional=None):
     if additional is None:
         additional = []
     files = ['setup.py', 'info.py', 'requirements', 'README.md', 'makefile', '.gitignore', 'tests', 'service',
-             'scripts', prj_name, 'logs', 'docs', 'deployments', 'data', 'configs', '.git'] + additional
+             'scripts', prj_name, 'logs', 'docs', 'deployments', 'data', 'configs'] + additional
     assert sorted(files) == sorted(os.listdir(folder))
 
 
@@ -43,13 +43,15 @@ def assert_service_name(folder, prj_name):
 
 class Core:
     def __init__(self):
-        self.__count = 0
+        self.__count = -1
 
     def __input(self, prj_name, answer):
+        self.__count += 1
         if self.__count == 0 and answer is not None:
-            self.__count += 1
             return answer
-        return prj_name
+        if self.__count in [0, 1]:
+            return prj_name
+        return ''
 
     def run_test(self, answer, prj_name, agree, folders):
         utils.create(folders)

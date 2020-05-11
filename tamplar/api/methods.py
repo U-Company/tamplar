@@ -3,13 +3,8 @@ import shutil
 import subprocess
 
 import git
-from setuptools import sandbox as setuptools_
 
-from tamplar.__internal import utils
-
-
-repo_name = 'python-service-layout'
-account = 'git://github.com/Hedgehogues'
+from tamplar.__internal import utils, init as init_pkg
 
 
 def deps():
@@ -38,24 +33,14 @@ def init(agree=None, src_path=None, dst_path=None):
     cleaned = utils.clean_directory(path=src_path, agree=agree)
     if not cleaned:
         return
-    prj_name = utils.input_('Please enter project name (available letters: digits, latin alphanum, -, _, space)')
-    assert len(prj_name) > 0, 'project name must be not empty'
-    utils.name_validator(prj_name)
-    src_path_ = os.path.abspath(f'{src_path}{repo_name}/')
+    params = init_pkg.init_params()
     dst_path_ = os.path.abspath(f'{dst_path}') + '/'
-    git.Git(dst_path_).clone(f'{account}/{repo_name}.git')
-    utils.mv(src=src_path_, dst=dst_path_)
-    pkg_name = utils.package_name(prj_name)
-    pkg_src_path = f'{src_path}{repo_name.replace("-", "_")}/'
-    pkg_dst_path = f'{dst_path_}{pkg_name}/'
-    utils.mv(src=pkg_src_path, dst=pkg_dst_path)
-    os.rename(f'{dst_path_}setup.tmpl', f'{dst_path_}setup.py')
-    os.rename(f'{dst_path_}info.tmpl', f'{dst_path_}info.py')
-    with open(f'{dst_path_}info.py') as fd:
-        lines = fd.read()
-    with open(f'{dst_path_}info.py', 'w') as fd:
-        lines = lines.replace(repo_name, prj_name)
-        fd.write(lines)
+    git.Git(dst_path_).clone(f'{init_pkg.account}/{init_pkg.repo_name}.git')
+    init_pkg.init_package(params, src_path, dst_path)
+    init_pkg.init_tmpl(params=params, path=dst_path)
+    shutil.copyfile(os.path.expanduser('~') + params.pip_conf_path, src_path+'./deployments/.secrets/pip.conf') # TODO: not tested
+    shutil.rmtree(src_path+'.git')
+    init_pkg.init_readme(path=src_path)
 
 
 def run(mode='local', daemon=None):

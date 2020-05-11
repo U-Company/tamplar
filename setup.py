@@ -1,6 +1,6 @@
 import setuptools
 
-import version
+import info
 
 
 def parse_requirements(filename):
@@ -18,8 +18,8 @@ print(install_reqs)
 dscr = "This util creates new service of python. This one has some additional command cli for control of development"
 
 setuptools.setup(
-    name=version.app_name,
-    version=version.app_version,
+    name=info.app_name,
+    version=info.app_version,
     author="Urvanov Egor",
     author_email="hedgehogues@bk.ru",
     description=dscr,

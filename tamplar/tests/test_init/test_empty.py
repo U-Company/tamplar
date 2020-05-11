@@ -6,8 +6,6 @@ from tamplar.tests import utils, test_init
 
 @pytest.fixture(scope='function', autouse=True)
 def fixture():
-    global count
-    count = 0
     utils.clean(tests.src_path)
     yield
     utils.clean(tests.src_path)

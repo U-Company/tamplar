@@ -38,7 +38,7 @@ def init_params():
                       pip_conf_path=pip_conf_path)
 
 
-def init_readme(path):
+def init_readme(path, params):
     for root, dirs, files in os.walk(path):  # TODO: not tested
         with open(f'{root}/.gitkeep', 'w') as fd:
             fd.write('')
@@ -48,7 +48,7 @@ def init_readme(path):
             os.remove(os.path.join(root, name))
     os.remove(path + '.gitkeep')
     with open(path+'README.md', 'w') as fd:  # TODO: not tested
-        fd.write(f'# {repo_name}\n')
+        fd.write(f'# {params.prj_name}\n')  # TODO: not tested
 
 
 def init_tmpl(params, path):

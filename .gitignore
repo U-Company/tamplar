@@ -12,3 +12,4 @@ scripts/migration.log
 .~lock*
 *log
 .logs/
+data/test/.generated/*

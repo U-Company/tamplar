@@ -47,6 +47,39 @@ all dependencies:
     tamplar deps
     
 This command uses `pip` and `requirements`.   
+
+### Upload (Not implemented)
+
+You can upload your package to concrete pypi registry and docker registry
+
+    tamplar upload docker=True pypi=True namespace=<your-namespace from .pypirc>
+    
+After that, it built your docker image, pypi registry and push to the registry with latest version from `info.py`. 
+Registry is selected by namespace parameter.
+
+### Validate (Not implemented)
+
+This command checks struct of project by [python-service-layout](https://github.com/U-Company/python-service-layout).
+
+    tamplar validate
+
+### Run full (Not stable)
+
+This command build and run docker with services with environment (dependencies of services)
+
+    tamplar run full
+    
+We implement execute docker-compose by python library docker-compose internal API. After run, it run docker-compose file
+or you get status code error 
+
+### Run env
+
+This command build and run docker WITHOUT services with environment (dependencies of services)
+
+    tamplar run env
+    
+We implement execute docker-compose by python library docker-compose internal API. After run, it run docker-compose file
+or you get status code error
     
 ### Clean
 

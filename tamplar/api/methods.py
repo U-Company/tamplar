@@ -1,5 +1,4 @@
 import os
-import pprint
 import shutil
 import subprocess
 
@@ -17,7 +16,7 @@ def deps():
     install dependencies from requirements
     :return:
     """
-    pprint.pprint('install dependencies')
+    print('install dependencies')
     subprocess.call(['pip', 'install', '-r', 'requirements'])
 
 
@@ -34,7 +33,7 @@ def init(agree=None, src_path=None, dst_path=None):
         src_path = './'
     if dst_path is None:
         dst_path = './'
-    pprint.pprint('initialize new service')
+    print('initialize new service')
     cleaned = utils.clean_directory(path=src_path, agree=agree)
     if not cleaned:
         return
@@ -71,11 +70,11 @@ def run(src_path=None, mode='full'):
     else:
         raise NotImplementedError('undefined mode')
     if mode == 'full':
-        pprint.pprint('building container')
+        print('building container')
     project = command_compose.get_project(project_dir='.', config_path=[file_path])
     services = project.up(detached=True)
     if mode == 'full':
-        pprint.pprint('container started')
+        print('container started')
     failed = False
     codes = {}
     for s in services:
@@ -88,10 +87,10 @@ def run(src_path=None, mode='full'):
         codes[s.name] = f'status code: {s.exit_code}'
         failed = True
     if not failed:
-        pprint.pprint(f'OK. all service exited with zero status codes. services: {codes}')
+        print(f'OK. all service exited with zero status codes. services: {codes}')
         return
     project.kill()  # TODO: NOT TESTED
-    pprint.pprint(f'FAILED. all service exited with NON-zero status codes. state: {codes}')
+    print(f'FAILED. all service exited with NON-zero status codes. state: {codes}')
     return
 
 

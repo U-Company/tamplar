@@ -1,4 +1,5 @@
-GitPython
+GitPython==3.1.2
 docker-compose==1.25.5
-fire
-pytest
+fire==0.3.1
+pytest==5.4.2
+Jinja2==2.11.2

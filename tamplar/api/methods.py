@@ -2,6 +2,8 @@ import os
 import shutil
 import subprocess
 
+from compose import service
+
 from tamplar.__internal import utils, init as init_pkg
 
 import git
@@ -59,7 +61,7 @@ def kill(src_path=None):  # NOT Tested
         project.kill()
 
 
-def run(src_path=None, mode='full'):
+def run(src_path=None, mode='full', build='yes'):
     global codes
     if src_path is None:
         src_path = './'
@@ -72,7 +74,14 @@ def run(src_path=None, mode='full'):
     if mode == 'full':
         print('building container')
     project = command_compose.get_project(project_dir='.', config_path=[file_path])
-    services = project.up(detached=True)
+    build = build.lower()
+    if build == 'yes':
+        build_mode = service.BuildAction.force
+    elif build == 'no':
+        build_mode = None
+    else:
+        raise NotImplementedError('build may be only [yes, no]')
+    services = project.up(detached=True, do_build=build_mode)
     if mode == 'full':
         print('container started')
     failed = False

@@ -91,4 +91,8 @@ Clean is command for cleaning your building files:
 
 Tamplar have a lot of good tests. But we have not any integration tests, because it is very difficult emulate python's 
 environment. Therefore we change integration tests to unit tests mixed integration tests (we creates and deletes files)
-while tests.  
+while tests:
+
+    make test
+
+If you want to execute test from IDE, you need to go `tests/__init__.py` and change `deep=2`. 

@@ -5,6 +5,8 @@ from collections import namedtuple
 
 from tamplar.__internal import utils
 
+from jinja2 import Template
+
 
 class DockerCompose(enum.Enum):
     Started = 0
@@ -81,8 +83,8 @@ def fill_template(f, params):
     os.rename(f, f[:-5])
     with open(f[:-5]) as fd:
         lines = fd.read()
-    for p in params._asdict().items():
-        lines = lines.replace('{{' + p[0] + '}}', p[1])
+    template = Template(lines)
+    lines = str(template.render(**dict(params._asdict())))
     with open(f[:-5], 'w') as fd:
         fd.write(lines)
 

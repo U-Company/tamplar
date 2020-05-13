@@ -1,4 +1,4 @@
 GitPython
-compose
+docker-compose==1.25.5
 fire
 pytest

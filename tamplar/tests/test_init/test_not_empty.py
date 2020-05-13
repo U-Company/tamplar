@@ -1,11 +1,13 @@
 import pytest
 
 from tamplar import tests
+from tamplar.__internal import init
 from tamplar.tests import utils, test_init
 
 
 @pytest.fixture(scope='function', autouse=True)
 def fixture():
+    init.default_pip_conf = f'{tests.src_path}/../pip.conf'
     utils.clean(tests.src_path)
     yield
     utils.clean(tests.src_path)
@@ -17,7 +19,7 @@ def test_init_no():
     agree = None
     folders = [tests.src_path + '1']
 
-    test_init.Core().run_test(answer=answer, prj_name=prj_name, agree=agree, folders=folders)
+    test_init.Core(prj_name=prj_name).run_test(answer=answer, agree=agree, folders=folders)
 
     test_init.assert_exist_folder(folders[0])
 
@@ -28,7 +30,7 @@ def test_init_NO():
     agree = None
     folders = [tests.src_path + '1']
 
-    test_init.Core().run_test(answer=answer, prj_name=prj_name, agree=agree, folders=folders)
+    test_init.Core(prj_name=prj_name).run_test(answer=answer, agree=agree, folders=folders)
 
     test_init.assert_exist_folder(folders[0])
 
@@ -40,7 +42,7 @@ def test_init_invalid():
     folders = [tests.src_path + '1']
 
     with pytest.raises(AssertionError):
-        test_init.Core().run_test(answer=answer, prj_name=prj_name, agree=agree, folders=folders)
+        test_init.Core(prj_name=prj_name).run_test(answer=answer, agree=agree, folders=folders)
 
     test_init.assert_exist_folder(folders[0])
 
@@ -51,7 +53,7 @@ def test_init_yes():
     agree = None
     folders = [tests.src_path + '1']
 
-    test_init.Core().run_test(answer=answer, prj_name=prj_name, agree=agree, folders=folders)
+    test_init.Core(prj_name=prj_name).run_test(answer=answer, agree=agree, folders=folders)
 
     test_init.assert_validate_layout(tests.src_path, prj_name=prj_name)
     test_init.assert_exist_folder(folders[0], not_=True)
@@ -63,7 +65,7 @@ def test_init_YES():
     agree = None
     folders = [tests.src_path + '1']
 
-    test_init.Core().run_test(answer=answer, prj_name=prj_name, agree=agree, folders=folders)
+    test_init.Core(prj_name=prj_name).run_test(answer=answer, agree=agree, folders=folders)
 
     test_init.assert_validate_layout(tests.src_path, prj_name=prj_name)
     test_init.assert_exist_folder(folders[0], not_=True)
@@ -75,7 +77,7 @@ def test_init_none():
     agree = None
     folders = [tests.src_path + '1']
 
-    test_init.Core().run_test(answer=answer, prj_name=prj_name, agree=agree, folders=folders)
+    test_init.Core(prj_name=prj_name).run_test(answer=answer, agree=agree, folders=folders)
 
     test_init.assert_validate_layout(tests.src_path, prj_name=prj_name)
     test_init.assert_exist_folder(folders[0], not_=True)
@@ -88,7 +90,7 @@ def test_init_prj_name_empty():
     folders = [tests.src_path + '1']
 
     with pytest.raises(AssertionError):
-        test_init.Core().run_test(answer=answer, prj_name=prj_name, agree=agree, folders=folders)
+        test_init.Core(prj_name=prj_name).run_test(answer=answer, agree=agree, folders=folders)
 
     test_init.assert_empty(tests.src_path)
 
@@ -100,7 +102,7 @@ def test_init_agree_invalid():
     folders = [tests.src_path + '1']
 
     with pytest.raises(AssertionError):
-        test_init.Core().run_test(answer=answer, prj_name=prj_name, agree=agree, folders=folders)
+        test_init.Core(prj_name=prj_name).run_test(answer=answer, agree=agree, folders=folders)
 
     test_init.assert_exist_folder(tests.src_path)
 
@@ -111,7 +113,7 @@ def test_init_agree_yes():
     agree = 'y'
     folders = [tests.src_path + '1']
 
-    test_init.Core().run_test(answer=answer, prj_name=prj_name, agree=agree, folders=folders)
+    test_init.Core(prj_name=prj_name).run_test(answer=answer, agree=agree, folders=folders)
 
     test_init.assert_validate_layout(tests.src_path, prj_name=prj_name)
     test_init.assert_exist_folder(folders[0], not_=True)
@@ -123,7 +125,7 @@ def test_init_agree_no():
     agree = 'n'
     folders = [tests.src_path + '1']
 
-    test_init.Core().run_test(answer=answer, prj_name=prj_name, agree=agree, folders=folders)
+    test_init.Core(prj_name=prj_name).run_test(answer=answer, agree=agree, folders=folders)
 
     test_init.assert_exist_folder(folders[0])
 
@@ -134,6 +136,6 @@ def test_init_idea():
     agree = 'y'
     folders = [tests.src_path + '.idea']
 
-    test_init.Core().run_test(answer=answer, prj_name=prj_name, agree=agree, folders=folders)
+    test_init.Core(prj_name=prj_name).run_test(answer=answer, agree=agree, folders=folders)
 
     test_init.assert_validate_layout(tests.src_path, prj_name=prj_name, additional=['.idea'])

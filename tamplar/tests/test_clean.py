@@ -3,12 +3,14 @@ import os
 import pytest
 
 from tamplar import tests
+from tamplar.__internal import init
 from tamplar.api import methods
 from tamplar.tests import utils
 
 
 @pytest.fixture(scope='function', autouse=True)
 def fixture():
+    init.default_pip_conf = f'{tests.src_path}/../pip.conf'
     utils.clean(tests.src_path)
     yield
     utils.clean(tests.src_path)

@@ -21,6 +21,18 @@ def assert_exist_folder(folder, not_=False):
     assert os.path.isdir(folder)
 
 
+def assert_info(folder, validates):
+    with open(f'{folder}info.py') as fd:
+        lines = fd.read().split('\n')
+        values = dict([l.split(' = ') for l in lines])
+        for k in values:
+            values[k] = values[k][1:-1]
+            found = k in validates
+            checked = found and validates[k] == values[k]
+            assert checked or not found
+        print(values)
+
+
 def assert_count_folders(folder, count_):
     assert len(os.listdir(folder)) == count_
 
@@ -38,23 +50,75 @@ def assert_service_name(folder, prj_name):
         assert fd.read().find(prj_name) >= 0
 
 
-# check service name
+def assert_pip_conf(folder, pip_conf_path):
+    with open(pip_conf_path) as fd:
+        pip_conf = fd.read()
+    with open(folder+'deployments/.secrets/pip.conf', 'r') as fd:
+        assert fd.read() == pip_conf
+
+
+def assert_docker_compose_full(folder):
+    with open(folder+'deployments/docker-compose.full.yml', 'r') as fd:
+        assert fd.read().find('{{prj_name}}') == -1
+
+
+def assert_envs(folder):
+    with open(folder+'deployments/.envs/local.env', 'r') as fd:
+        assert fd.read().find('{{PRJ_NAME}}') == -1
+
+
+def assert_gitignore_tamplar(folder):
+    with open(folder+'.gitignore', 'r') as fd:
+        assert fd.read().find('.tamplar') != -1
 
 
 class Core:
-    def __init__(self):
+    def __init__(self, prj_name, author_name='', author_email='', description='', pip_conf=''):
         self.__count = -1
+        self.prj_name = prj_name
+        self.author_name = author_name
+        self.author_email = author_email
+        self.description = description
+        self.pip_conf = pip_conf
 
-    def __input(self, prj_name, answer):
+    def __answer_is_not_none(self):
+        if self.__count == 1:
+            return self.prj_name
+        elif self.__count == 2:
+            return self.author_name
+        elif self.__count == 3:
+            return self.author_email
+        elif self.__count == 4:
+            return self.description
+        elif self.__count == 5:
+            return self.pip_conf
+        else:
+            raise NotImplementedError()
+
+    def __answer_none(self):
+        if self.__count == 0:
+            return self.prj_name
+        elif self.__count == 1:
+            return self.author_name
+        elif self.__count == 2:
+            return self.author_email
+        elif self.__count == 3:
+            return self.description
+        elif self.__count == 4:
+            return self.pip_conf
+        else:
+            raise NotImplementedError()
+
+    def __input(self, answer):
         self.__count += 1
         if self.__count == 0 and answer is not None:
             return answer
-        if self.__count in [0, 1]:
-            return prj_name
-        return ''
+        if answer is not None:
+            return self.__answer_is_not_none()
+        return self.__answer_none()
 
-    def run_test(self, answer, prj_name, agree, folders):
+    def run_test(self, answer, agree, folders):
         utils.create(folders)
-        _internal_utils.input_ = lambda _: self.__input(prj_name=prj_name, answer=answer)
+        _internal_utils.input_ = lambda _: self.__input(answer=answer)
 
         methods.init(agree=agree, src_path=tests.src_path, dst_path=tests.dst_path)

@@ -2,9 +2,10 @@ import os
 import shutil
 import subprocess
 
-import git
-
 from tamplar.__internal import utils, init as init_pkg
+
+import git
+from compose.cli import command as command_compose
 
 
 def deps():
@@ -38,20 +39,59 @@ def init(agree=None, src_path=None, dst_path=None):
     git.Git(dst_path_).clone(f'{init_pkg.account}/{init_pkg.repo_name}.git')
     init_pkg.init_package(params, src_path, dst_path)
     init_pkg.init_tmpl(params=params, path=dst_path)
-    shutil.copyfile(os.path.expanduser('~') + params.pip_conf_path, src_path+'./deployments/.secrets/pip.conf') # TODO: not tested
+    init_pkg.init_envs(params=params, path=dst_path)
+    init_pkg.init_docker_compose(params=params, path=dst_path)
+    shutil.copyfile(params.pip_conf_path, src_path+'./deployments/.secrets/pip.conf') # TODO: not tested
     shutil.rmtree(src_path+'.git')
     init_pkg.init_readme(path=src_path, params=params)
+    init_pkg.init_gitignore(src_path=src_path)  # TODO: not tested
 
 
-def run(mode='local', daemon=None):
+def kill(src_path=None):
+    if src_path is None:
+        src_path = './'
+    paths = [f'{src_path}docker-compose.full.yml', f'{src_path}docker-compose.env.yml']
+    project_dir = '.'
+    for file_path in paths:
+        project = command_compose.get_project(project_dir, [file_path])
+        project.kill()
+
+
+def run(src_path=None, mode='full'):  # TODO: not tested
+    if src_path is None:
+        src_path = './'
+    if mode == 'full':
+        file_path = f'{src_path}docker-compose.full.yml'
+    elif mode == 'env':
+        file_path = f'{src_path}docker-compose.env.yml'
+    else:
+        raise NotImplementedError('undefined mode')
+    project_dir = '.'
+    project = command_compose.get_project(project_dir, [file_path])
+    services = project.up()
+    failed = False
+    codes = {}
+    for s in services:
+        codes[s.name] = s.exit_code
+        if s.exit_code == 0:
+            continue
+        failed = True
+    if not failed:
+        print(f'all service exited with zero status codes. state: {list(codes.keys())}')
+        return
+    project.kill()
+    print(f'all service exited with NON-zero status codes. state: {codes}')
+
+
+def upload(src_path=None, pypi=True, docker=True):
     raise NotImplementedError()
-    # full
-    # env
-    # compose.TopLevelCommand()
+    if src_path is None:
+        src_path = './'
+    file_path = f'{src_path}docker-compose.full.yml'
+    project_dir = '.'
+    project = command_compose.get_project(project_dir, [file_path])
+    services = project.build()
 
-
-def upload(pypi=None, docker=None):
-    raise NotImplementedError()
     # args = ['bdist_wheel', 'upload']
     # if pypi is not None:
     #     args += ['-r', pypi]
@@ -85,5 +125,16 @@ def clean(src_path=None):
         shutil.rmtree(f'{src_path}/{name}')
 
 
-def test(mode):
+def test(mode='integration', src_path=None):
+    if src_path is None:
+        src_path = './'
+    if mode == 'integration':
+        run(src_path=src_path, mode='full')
+        pass
+        kill(src_path=src_path)
+    elif mode == 'unit':
+        pass
+
+
+def validate(src_path=None):
     raise NotImplementedError()

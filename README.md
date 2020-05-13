@@ -9,6 +9,21 @@ Now, we use [this](https://github.com/U-Company/python-service-layout) python la
 
     pip install tamplar
     
+If you want local environments, you need a docker. Please install:
+
+    sudo apt-get install docker.io
+    
+We don't use docker-compose as console util. We build docker-compose from source and we use docker API into python code.
+
+# Usage
+
+tamplar can work with:
+
+- pip
+- publishing package to pypi registry
+- publishing docker to docker registry
+- docker-compose for local development
+    
 # Console running
 
 ### Init

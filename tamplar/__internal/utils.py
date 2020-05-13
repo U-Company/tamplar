@@ -1,12 +1,15 @@
 import os
 import shutil
-import string
 
 
 input_ = input
 
+tamplar_config = '.tamplar'
+
 
 def mv(src, dst, symlinks=False, ignore=None):
+    if not os.path.exists(dst):
+        os.mkdir(dst)
     for item in os.listdir(src):
         s = os.path.abspath(os.path.join(src, item))
         d = os.path.abspath(os.path.join(dst, item))

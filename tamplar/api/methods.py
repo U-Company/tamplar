@@ -9,6 +9,9 @@ import git
 from compose.cli import command as command_compose
 
 
+codes = {}
+
+
 def deps():
     """
     install dependencies from requirements
@@ -40,9 +43,6 @@ def init(agree=None, src_path=None, dst_path=None):
     git.Git(dst_path_).clone(f'{init_pkg.account}/{init_pkg.repo_name}.git')
     init_pkg.init_package(params, src_path, dst_path)
     init_pkg.init_templates(params=params, path=dst_path)
-    # init_pkg.init_tmpl(params=params, path=dst_path)
-    # init_pkg.init_envs(params=params, path=dst_path)
-    # init_pkg.init_docker_compose(params=params, path=dst_path)
     shutil.copyfile(params.pip_conf_path, src_path+'./deployments/.secrets/pip.conf')
     shutil.rmtree(src_path+'.git')
     init_pkg.init_readme(path=src_path, params=params)
@@ -61,6 +61,7 @@ def kill(src_path=None):  # NOT Tested
 
 
 def run(src_path=None, mode='full'):
+    global codes
     if src_path is None:
         src_path = './'
     if mode == 'full':  # TODO: NOT TESTED
@@ -88,10 +89,10 @@ def run(src_path=None, mode='full'):
         failed = True
     if not failed:
         pprint.pprint(f'OK. all service exited with zero status codes. services: {codes}')
-        return codes
+        return
     project.kill()  # TODO: NOT TESTED
     pprint.pprint(f'FAILED. all service exited with NON-zero status codes. state: {codes}')
-    return codes
+    return
 
 
 def upload(src_path=None, pypi=True, docker=True):

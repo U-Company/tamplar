@@ -25,24 +25,24 @@ def assert_status(items, status):
 def test_run_env_started():
     mode = 'env'
 
-    resp = methods.run(src_path=tests.src_path, mode=mode)
-    assert_status(resp.items(), init.DockerCompose.Started)
+    methods.run(src_path=tests.src_path, mode=mode)
+    assert_status(methods.codes.items(), init.DockerCompose.Started)
 
 
 def test_run_env_already_works():
     mode = 'env'
 
-    resp = methods.run(src_path=tests.src_path, mode=mode)
-    assert_status(resp.items(), init.DockerCompose.Started)
-    resp = methods.run(src_path=tests.src_path, mode=mode)
-    assert_status(resp.items(), init.DockerCompose.AlreadyWorks)
+    methods.run(src_path=tests.src_path, mode=mode)
+    assert_status(methods.codes.items(), init.DockerCompose.Started)
+    methods.run(src_path=tests.src_path, mode=mode)
+    assert_status(methods.codes.items(), init.DockerCompose.AlreadyWorks)
 
 
 def test_run_env_rerun():
     mode = 'env'
 
-    resp = methods.run(src_path=tests.src_path, mode=mode)
-    assert_status(resp.items(), init.DockerCompose.Started)
+    methods.run(src_path=tests.src_path, mode=mode)
+    assert_status(methods.codes.items(), init.DockerCompose.Started)
     methods.kill(src_path=tests.src_path)
-    resp = methods.run(src_path=tests.src_path, mode=mode)
-    assert_status(resp.items(), init.DockerCompose.Started)
+    methods.run(src_path=tests.src_path, mode=mode)
+    assert_status(methods.codes.items(), init.DockerCompose.Started)

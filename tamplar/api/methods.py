@@ -25,7 +25,6 @@ def deps():
 def init(agree=None, src_path=None, dst_path=None):
     """
     init is used to initialize new project
-
     :param agree: is need to clean
     :param src_path: path to repo of cloning
     :param dst_path: path to repo of extract
@@ -50,7 +49,12 @@ def init(agree=None, src_path=None, dst_path=None):
     init_pkg.init_gitignore(src_path=src_path)
 
 
-def kill(src_path=None):  # NOT Tested
+def kill(src_path=None):
+    """
+    kill is used to kill your docker-compose (like docker-compose kill)
+    :param src_path: path to folder of killing docker-compose
+    :return:
+    """
     if src_path is None:
         src_path = './'
     path = src_path + 'deployments/'
@@ -62,6 +66,16 @@ def kill(src_path=None):  # NOT Tested
 
 
 def run(src_path=None, mode='full', build='yes'):
+    """
+    run is used to run (like docker-compose up)
+    :param src_path: path to folder of running package
+    :param mode:
+        full or env:
+            - env is environment running.
+            - full is service with environment running
+    :param build: is needed to build service container (like docker-compose up --build)
+    :return:
+    """
     global codes
     if src_path is None:
         src_path = './'
@@ -103,7 +117,16 @@ def run(src_path=None, mode='full', build='yes'):
     return
 
 
-def upload(src_path=None, pypi=True, docker=True):
+def upload(src_path=None, pypi='yes', docker=True):
+    """
+    NOT IMPLEMENTED
+
+    upload is used to upload package to docker registry and pypi registry
+    :param src_path: path to folder of uploading package
+    :param pypi: yes or no is needed to upload your package into pypi registry
+    :param docker: yes or no is needed to upload your package into docker registry
+    :return:
+    """
     raise NotImplementedError()
     if src_path is None:
         src_path = './'
@@ -124,9 +147,8 @@ def upload(src_path=None, pypi=True, docker=True):
 
 def clean(src_path=None):
     """
-    This method is used to clean repo from built files
-
-    :param src_path: path to repo of cleaning
+    clean is used to clean repo from built files
+    :param src_path: path to folder of cleaning
     :return:
     """
     if src_path is None:
@@ -146,6 +168,14 @@ def clean(src_path=None):
 
 
 def test(mode='integration', src_path=None):
+    """
+    NOT IMPLEMENTED
+
+    test is used to test your project
+    :param mode: integration or unit
+    :param src_path: path to folder of testing
+    :return:
+    """
     raise NotImplementedError()
     if src_path is None:
         src_path = './'
@@ -158,4 +188,11 @@ def test(mode='integration', src_path=None):
 
 
 def validate(src_path=None):
+    """
+    NOT IMPLEMENTED
+
+    validate is used to validate your project with https://github.com/U-Company/python-service-layout by rules
+    :param src_path: path to folder of validation
+    :return:
+    """
     raise NotImplementedError()

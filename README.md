@@ -72,8 +72,6 @@ This command build and run docker with services with environment (dependencies o
 We implement execute docker-compose by python library docker-compose internal API. After run, it run docker-compose file
 or you get status code error 
 
-
-
 ### Run env
 
 This command build and run docker WITHOUT services with environment (dependencies of services)
@@ -88,6 +86,11 @@ or you get status code error
 Clean is command for cleaning your building files:
 
     tamplar clean
+    
+# Dependency
+
+If you want to add new service as dependency, you need to go to the `deployment/docker-compose.*.yml`. After that, you 
+need new service to your docker-compose files.
 
 # Test
 

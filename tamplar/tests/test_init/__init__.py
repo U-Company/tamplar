@@ -24,13 +24,12 @@ def assert_exist_folder(folder, not_=False):
 def assert_info(folder, validates):
     with open(f'{folder}info.py') as fd:
         lines = fd.read().split('\n')
-        values = dict([l.split(' = ') for l in lines])
+        values = dict([l.split(' = ') for l in lines if len(l) > 0])
         for k in values:
             values[k] = values[k][1:-1]
             found = k in validates
             checked = found and validates[k] == values[k]
             assert checked or not found
-        print(values)
 
 
 def assert_count_folders(folder, count_):
@@ -40,8 +39,8 @@ def assert_count_folders(folder, count_):
 def assert_validate_layout(folder, prj_name, additional=None):
     if additional is None:
         additional = []
-    files = ['setup.py', 'info.py', 'requirements', 'README.md', 'makefile', '.gitignore', 'tests', 'service',
-             'scripts', prj_name, 'logs', 'docs', 'deployments', 'data', 'configs'] + additional
+    files = ['setup.py', 'info.py', 'requirements', 'README.md', 'makefile', '.gitignore', 'tests', prj_name,
+             'deployments', 'data'] + additional
     assert sorted(files) == sorted(os.listdir(folder))
 
 

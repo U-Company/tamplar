@@ -67,7 +67,7 @@ This command checks struct of project by [python-service-layout](https://github.
 
 This command build and run docker with services with environment (dependencies of services)
 
-    tamplar run --mode=full
+    tamplar run --mode=full --build=no
     
 We implement execute docker-compose by python library docker-compose internal API. After run, it run docker-compose file
 or you get status code error 
@@ -76,7 +76,7 @@ or you get status code error
 
 This command build and run docker WITHOUT services with environment (dependencies of services)
 
-    tamplar run --mode=env
+    tamplar run --mode=env --build=yes
     
 We implement execute docker-compose by python library docker-compose internal API. After run, it run docker-compose file
 or you get status code error

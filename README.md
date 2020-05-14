@@ -37,7 +37,7 @@ Go to empty directory and init your first project
 After that, you get [FastAPI](https://fastapi.tiangolo.com/) service with healthcheck methods. FastAPI is ASGI framework
 instead of [Flask](https://flask.palletsprojects.com/).
 
-If you want reinitialize, tamplar ask you about cleaning repo. If you works with JetBrains IDE, while initialization we
+If you want reinitialize, tamplar ask you about cleaning repo. If you work with JetBrains IDE, while initialization we
 ignore `.idea` files.
 
 ### Deps

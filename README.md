@@ -11,7 +11,7 @@ Now, we use [this](https://github.com/U-Company/python-service-layout) python la
 
     pip install tamplar
     
-If you want local environments, you need a docker. Please install:
+If you want to use local environments, you need a docker. Please install:
 
     sudo apt-get install docker.io
     

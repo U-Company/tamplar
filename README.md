@@ -1,7 +1,9 @@
 # Tamplar
 
-Tamplar is service generator. This project can to help you control your development. We think, you should development
+Tamplar is service generator. This project can to help you control your local development. We think, you should development
 with isolated environment. Therefore we creates docker-compose for local debugging and testing. 
+
+Please, don't use tamplar for deployment or other automatically processes. This util is used to only for simplyfy development.
 
 Now, we use [this](https://github.com/U-Company/python-service-layout) python layout.
 

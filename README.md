@@ -1,3 +1,7 @@
+# NOTICE
+
+We don't use this repo. Instead of, we use [cookiecutter](https://github.com/cookiecutter/cookiecutter) and makefile in each repo layout.
+
 # Tamplar
 
 Tamplar is service generator. This project can to help you control your local development. We think, you should development
